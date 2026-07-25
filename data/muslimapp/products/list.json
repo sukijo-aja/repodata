@@ -4,7 +4,7 @@
     "name": "Al-Qur'an Tajwid Berwarna & Terjemahan",
     "description": "Al-Qur'an ukuran A5 dilengkapi dengan tajwid berwarna dan terjemahan bahasa Indonesia, sangat membantu untuk tartil.",
     "price": 75000,
-    "image_url": "https://example.com/images/quran.jpg",
+    "image_url": "https://images.unsplash.com/photo-1606231140504-b6bf4b692ab3?q=80&w=800&auto=format&fit=crop",
     "category_id": 1,
     "affiliate_link": ""
   },
@@ -13,7 +13,7 @@
     "name": "Sajadah Busa Tebal Premium",
     "description": "Sajadah dengan material busa tebal yang empuk dan anti-slip, memberikan kenyamanan ekstra saat beribadah.",
     "price": 125000,
-    "image_url": "https://example.com/images/sajadah.jpg",
+    "image_url": "https://images.unsplash.com/photo-1596766480572-c0e8f7ec7624?q=80&w=800&auto=format&fit=crop",
     "category_id": 2,
     "affiliate_link": ""
   },
@@ -22,7 +22,7 @@
     "name": "Tasbih Digital Mini LED",
     "description": "Tasbih digital praktis dilengkapi lampu LED, bisa digunakan di tempat gelap.",
     "price": 15000,
-    "image_url": "https://example.com/images/tasbih.jpg",
+    "image_url": "https://images.unsplash.com/photo-1597561848523-a25e6e61f238?q=80&w=800&auto=format&fit=crop",
     "category_id": 3,
     "affiliate_link": ""
   },
@@ -31,7 +31,7 @@
     "name": "Peci / Kopiah Hitam Bludru",
     "description": "Peci hitam nasional berbahan bludru berkualitas, awet dan tidak mudah kusut.",
     "price": 45000,
-    "image_url": "https://example.com/images/peci.jpg",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Foto_peci.jpg",
     "category_id": 4,
     "affiliate_link": ""
   },
@@ -40,7 +40,7 @@
     "name": "Baju Koko Kurta Modern",
     "description": "Baju koko model kurta lengan 3/4 dengan bahan katun toyobo yang adem dan nyaman dipakai.",
     "price": 110000,
-    "image_url": "https://example.com/images/kurta.jpg",
+    "image_url": "https://images.unsplash.com/photo-1594954273295-654854c60010?q=80&w=800&auto=format&fit=crop",
     "category_id": 4,
     "affiliate_link": ""
   }
