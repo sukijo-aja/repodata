@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repodata Explorer | Data API</title>
+    <meta name="description" content="Eksplorasi dan akses data JSON untuk aplikasi">
+    
+    <!-- Modern Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --card-bg: #1e293b;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --border: #334155;
+            --accent: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            padding-top: 2rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        p.subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #475569;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h2::before {
+            content: '📄';
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .badge-url {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.3rem 0.6rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        #viewer-container {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 0;
+            margin-top: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .viewer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0f172a;
+            padding: 1.2rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .viewer-header h3 {
+            font-weight: 600;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-copy {
+            background: #334155;
+            color: white;
+        }
+        
+        .btn-copy:hover {
+            background: #475569;
+        }
+
+        .btn-close {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .btn-close:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        .code-container {
+            padding: 1.5rem;
+            background: #1e293b;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        pre {
+            color: var(--accent);
+            font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .loading, .error-msg {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px dashed var(--border);
+        }
+
+        .error-msg {
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Data API Explorer</h1>
+            <p class="subtitle">Lihat dan akses endpoint data JSON Anda secara instan</p>
+        </header>
+
+        <div id="file-grid" class="grid">
+            <div class="loading">⏳ Memuat daftar endpoint API...</div>
+        </div>
+
+        <div id="viewer-container">
+            <div class="viewer-header">
+                <h3 id="viewer-title">📄 file.json</h3>
+                <div class="btn-group">
+                    <button class="btn btn-copy" onclick="copyUrl()" id="btn-copy">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        Salin URL
+                    </button>
+                    <button class="btn btn-close" onclick="closeViewer()">Tutup</button>
+                </div>
+            </div>
+            <div class="code-container">
+                <pre id="json-viewer"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sesuaikan path jika direktori file berbeda
+        const basePath = './data/muslimapp/products/';
+        const indexUrl = basePath + 'index.json';
+        let currentUrl = '';
+        
+        async function fetchIndex() {
+            try {
+                // Menambahkan timestamp cache-buster agar selalu ambil yang terbaru
+                const response = await fetch(indexUrl + '?t=' + new Date().getTime());
+                if (!response.ok) throw new Error('Data tidak ditemukan');
+                const files = await response.json();
+                renderGrid(files);
+            } catch (error) {
+                document.getElementById('file-grid').innerHTML = `
+                    <div class="error-msg">
+                        <h3>⚠️ Gagal memuat index.json</h3>
+                        <p style="margin-top: 0.5rem; color: #94a3b8;">
+                            Pastikan Anda sudah menjalankan script <code>./push.sh</code> terbaru untuk men-generate file index.
+                        </p>
+                    </div>`;
+            }
+        }
+
+        function renderGrid(files) {
+            const grid = document.getElementById('file-grid');
+            grid.innerHTML = '';
+            
+            if (!files || files.length === 0) {
+                grid.innerHTML = '<div class="loading">Tidak ada file JSON yang tersedia.</div>';
+                return;
+            }
+
+            files.forEach(file => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                // Mendapatkan absolute URL untuk kebutuhan Copy
+                const absoluteUrl = new URL(basePath + file, window.location.href).href;
+                
+                card.onclick = () => viewFile(file, absoluteUrl);
+                
+                card.innerHTML = `
+                    <h2>${file}</h2>
+                    <p>Klik untuk melihat detail JSON</p>
+                    <div class="badge-url">/products/${file}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        async function viewFile(fileName, url) {
+            currentUrl = url;
+            const viewer = document.getElementById('viewer-container');
+            const viewerTitle = document.getElementById('viewer-title');
+            const jsonViewer = document.getElementById('json-viewer');
+            const btnCopy = document.getElementById('btn-copy');
+            
+            btnCopy.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg> Salin URL';
+            
+            viewer.style.display = 'block';
+            viewerTitle.innerHTML = `📄 ${fileName}`;
+            jsonViewer.style.color = '#94a3b8';
+            jsonViewer.textContent = 'Mengambil data dari server...';
+            
+            // Animasi scroll yang smooth ke viewer
+            setTimeout(() => {
+                viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+
+            try {
+                const response = await fetch(basePath + fileName + '?t=' + new Date().getTime());
+                const data = await response.json();
+                
+                // Syntax highlighting sederhana untuk JSON (warna)
+                jsonViewer.style.color = 'var(--accent)';
+                jsonViewer.textContent = JSON.stringify(data, null, 4);
+            } catch (error) {
+                jsonViewer.style.color = '#ef4444';
+                jsonViewer.textContent = '❌ Error memuat file:\n' + error.message;
+            }
+        }
+        
+        function copyUrl() {
+            if (!currentUrl) return;
+            
+            navigator.clipboard.writeText(currentUrl).then(() => {
+                const btnCopy = document.getElementById('btn-copy');
+                btnCopy.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Tersalin!';
+                
+                setTimeout(() => {
+                    btnCopy.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg> Salin URL';
+                }, 2000);
+            });
+        }
+
+        function closeViewer() {
+            const viewer = document.getElementById('viewer-container');
+            viewer.style.display = 'none';
+        }
+
+        // Inisialisasi
+        fetchIndex();
+    </script>
+</body>
+</html>
