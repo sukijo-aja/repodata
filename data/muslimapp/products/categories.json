@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Buku & Kitab",
+    "icon_url": "https://example.com/icons/buku.png",
+    "description": "Al-Qur'an, buku tafsir, hadis, dan literatur Islam lainnya."
+  },
+  {
+    "id": 2,
+    "name": "Perlengkapan Ibadah",
+    "icon_url": "https://example.com/icons/sajadah.png",
+    "description": "Sajadah, mukena, sarung, dan kebutuhan sholat lainnya."
+  },
+  {
+    "id": 3,
+    "name": "Aksesoris",
+    "icon_url": "https://example.com/icons/tasbih.png",
+    "description": "Tasbih digital, tasbih kayu, siwak, parfum non-alkohol, dan aksesoris muslim."
+  },
+  {
+    "id": 4,
+    "name": "Pakaian Muslim",
+    "icon_url": "https://example.com/icons/pakaian.png",
+    "description": "Baju koko, gamis, peci, kopiah, hijab, dan busana muslim."
+  },
+  {
+    "id": 5,
+    "name": "Herbal & Makanan Sunnah",
+    "icon_url": "https://example.com/icons/herbal.png",
+    "description": "Kurma, madu, habbatussauda, minyak zaitun, dan produk herbal halal."
+  }
+]

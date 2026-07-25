@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Al-Qur'an Tajwid Berwarna & Terjemahan",
+    "description": "Al-Qur'an ukuran A5 dilengkapi dengan tajwid berwarna dan terjemahan bahasa Indonesia, sangat membantu untuk tartil.",
+    "price": 75000,
+    "image_url": "https://example.com/images/quran.jpg",
+    "category_id": 1,
+    "affiliate_link": ""
+  },
+  {
+    "id": 2,
+    "name": "Sajadah Busa Tebal Premium",
+    "description": "Sajadah dengan material busa tebal yang empuk dan anti-slip, memberikan kenyamanan ekstra saat beribadah.",
+    "price": 125000,
+    "image_url": "https://example.com/images/sajadah.jpg",
+    "category_id": 2,
+    "affiliate_link": ""
+  },
+  {
+    "id": 3,
+    "name": "Tasbih Digital Mini LED",
+    "description": "Tasbih digital praktis dilengkapi lampu LED, bisa digunakan di tempat gelap.",
+    "price": 15000,
+    "image_url": "https://example.com/images/tasbih.jpg",
+    "category_id": 3,
+    "affiliate_link": ""
+  },
+  {
+    "id": 4,
+    "name": "Peci / Kopiah Hitam Bludru",
+    "description": "Peci hitam nasional berbahan bludru berkualitas, awet dan tidak mudah kusut.",
+    "price": 45000,
+    "image_url": "https://example.com/images/peci.jpg",
+    "category_id": 4,
+    "affiliate_link": ""
+  },
+  {
+    "id": 5,
+    "name": "Baju Koko Kurta Modern",
+    "description": "Baju koko model kurta lengan 3/4 dengan bahan katun toyobo yang adem dan nyaman dipakai.",
+    "price": 110000,
+    "image_url": "https://example.com/images/kurta.jpg",
+    "category_id": 4,
+    "affiliate_link": ""
+  }
+]
