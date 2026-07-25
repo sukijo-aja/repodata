@@ -44,7 +44,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 3.5rem;
+            margin-bottom: 2.5rem;
             padding-top: 2rem;
         }
 
@@ -61,6 +61,40 @@
             color: #94a3b8;
             font-size: 1.1rem;
             font-weight: 300;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .tab-btn {
+            background: #1e293b;
+            color: #94a3b8;
+            border: 1px solid var(--border);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-btn:hover {
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px -3px rgba(59, 130, 246, 0.5);
         }
 
         .grid {
@@ -260,6 +294,11 @@
             <p class="subtitle">Lihat dan akses endpoint data JSON Anda secara instan</p>
         </header>
 
+        <div class="tabs">
+            <button class="tab-btn active" id="tab-products" onclick="switchTab('products')">🛍️ Data Produk</button>
+            <button class="tab-btn" id="tab-khutbah" onclick="switchTab('khutbah')">🕌 Data Khutbah</button>
+        </div>
+
         <div id="file-grid" class="grid">
             <div class="loading">⏳ Memuat daftar endpoint API...</div>
         </div>
@@ -282,35 +321,57 @@
     </div>
 
     <script>
-        // Sesuaikan path jika direktori file berbeda
-        const basePath = './data/muslimapp/products/';
-        const indexUrl = basePath + 'index.json';
+        let currentTab = 'products';
         let currentUrl = '';
         
+        function getBasePath() {
+            return `./data/muslimapp/${currentTab}/`;
+        }
+        
+        function switchTab(tabName) {
+            currentTab = tabName;
+            
+            // Update UI tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+            
+            // Hide viewer when switching tabs
+            closeViewer();
+            
+            // Fetch new data
+            fetchIndex();
+        }
+
         async function fetchIndex() {
+            const basePath = getBasePath();
+            const indexUrl = basePath + 'index.json';
+            const grid = document.getElementById('file-grid');
+            
+            grid.innerHTML = '<div class="loading">⏳ Memuat daftar endpoint API...</div>';
+            
             try {
                 // Menambahkan timestamp cache-buster agar selalu ambil yang terbaru
                 const response = await fetch(indexUrl + '?t=' + new Date().getTime());
                 if (!response.ok) throw new Error('Data tidak ditemukan');
                 const files = await response.json();
-                renderGrid(files);
+                renderGrid(files, basePath);
             } catch (error) {
-                document.getElementById('file-grid').innerHTML = `
+                grid.innerHTML = `
                     <div class="error-msg">
-                        <h3>⚠️ Gagal memuat index.json</h3>
+                        <h3>⚠️ Gagal memuat index.json untuk ${currentTab}</h3>
                         <p style="margin-top: 0.5rem; color: #94a3b8;">
-                            Pastikan Anda sudah menjalankan script <code>./push.sh</code> terbaru untuk men-generate file index.
+                            Pastikan Anda sudah menjalankan script <code>./push.sh</code> terbaru untuk men-generate file index kategori ini.
                         </p>
                     </div>`;
             }
         }
 
-        function renderGrid(files) {
+        function renderGrid(files, basePath) {
             const grid = document.getElementById('file-grid');
             grid.innerHTML = '';
             
             if (!files || files.length === 0) {
-                grid.innerHTML = '<div class="loading">Tidak ada file JSON yang tersedia.</div>';
+                grid.innerHTML = '<div class="loading">Tidak ada file JSON yang tersedia di kategori ini.</div>';
                 return;
             }
 
@@ -321,18 +382,18 @@
                 // Mendapatkan absolute URL untuk kebutuhan Copy
                 const absoluteUrl = new URL(basePath + file, window.location.href).href;
                 
-                card.onclick = () => viewFile(file, absoluteUrl);
+                card.onclick = () => viewFile(file, absoluteUrl, basePath);
                 
                 card.innerHTML = `
                     <h2>${file}</h2>
                     <p>Klik untuk melihat detail JSON</p>
-                    <div class="badge-url">/products/${file}</div>
+                    <div class="badge-url">/${currentTab}/${file}</div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        async function viewFile(fileName, url) {
+        async function viewFile(fileName, url, basePath) {
             currentUrl = url;
             const viewer = document.getElementById('viewer-container');
             const viewerTitle = document.getElementById('viewer-title');
@@ -382,7 +443,7 @@
             viewer.style.display = 'none';
         }
 
-        // Inisialisasi
+        // Inisialisasi awal (memuat tab default)
         fetchIndex();
     </script>
 </body>
