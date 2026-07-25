@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "title": "Keutamaan Sabar dalam Menghadapi Ujian",
+    "khotib": "Ustadz Ahmad",
+    "date": "2023-10-20",
+    "description": "Khutbah Jumat yang membahas tentang pentingnya memiliki sifat sabar dan pahala bagi orang-orang yang bersabar ketika ditimpa musibah.",
+    "content_url": "",
+    "category_id": 1,
+    "category": "Umum"
+  },
+  {
+    "id": 2,
+    "title": "Menjaga Silaturahmi di Era Digital",
+    "khotib": "Ustadz Abdullah",
+    "date": "2023-10-27",
+    "description": "Pentingnya mempererat tali persaudaraan dan adab bersosial media sesama muslim di tengah pesatnya teknologi komunikasi masa kini.",
+    "content_url": "",
+    "category_id": 1,
+    "category": "Umum"
+  },
+  {
+    "id": 3,
+    "title": "Pentingnya Menjaga Kebersihan Lingkungan",
+    "khotib": "Ustadz Ahmad",
+    "date": "2023-11-03",
+    "description": "Khutbah Jumat tentang pentingnya menjaga kebersihan lingkungan sebagai bagian dari iman dan tanggung jawab sebagai umat Islam.",
+    "content_url": "",
+    "category_id": 1,
+    "category": "Umum"
+  },
+  {
+    "id": 4,
+    "title": "Meneladani Sifat Rasulullah dalam Kehidupan Sehari-hari",
+    "khotib": "Ustadz Abdullah",
+    "date": "2023-11-10",
+    "description": "Pembahasan mengenai akhlak mulia Nabi Muhammad SAW dan bagaimana kita dapat mengimplementasikannya dalam kehidupan modern.",
+    "content_url": "",
+    "category_id": 1,
+    "category": "Umum"
+  },
+  {
+    "id": 5,
+    "title": "Keutamaan Zikir dan Doa",
+    "khotib": "Ustadz Ahmad",
+    "date": "2023-11-17",
+    "description": "Menggali hikmah dan fadhilah dari amalan zikir dan doa sebagai sarana mendekatkan diri kepada Allah SWT.",
+    "content_url": "",
+    "category_id": 1,
+    "category": "Umum"
+  },
+  {
+    "id": 6,
+    "title": "Membangun Generasi Muda yang Berkarakter Islam",
+    "khotib": "Ustadz Abdullah",
+    "date": "2023-11-24",
+    "description": "Strategi mendidik generasi penerus agar memiliki kepribadian muslim yang kuat di tengah tantangan zaman.",
+    "content_url": "",
+    "category_id": 1,
+    "category": "Umum"
+  },
+  {
+    "id": 7,
+    "title": "Hikmah di Balik Musibah dan Bencana Alam",
+    "khotib": "Ustadz Ahmad",
+    "date": "2023-12-01",
+    "description": "Refleksi mendalam mengenai makna dan pelajaran yang dapat diambil dari peristiwa alam sebagai bentuk tazkirah bagi umat manusia.",
+    "content_url": "",
+    "category_id": 1,
+    "category": "Umum"
+  },
+  {
+    "id": 8,
+    "title": "Keutamaan Sedekah dan Menolong Sesama",
+    "khotib": "Ustadz Abdullah",
+    "date": "2023-12-08",
+    "description": "Membahas manfaat sedekah, baik bagi pemberi maupun penerima, serta pentingnya membantu sesama sebagai wujud solidaritas umat.",
+    "content_url": "",
+    "category_id": 1,
+    "category": "Umum"
+  },
+  {
+    "id": 9,
+    "title": "Sikap Toleransi dalam Islam",
+    "khotib": "Ustadz Ahmad",
+    "date": "2023-12-15",
+    "description": "Menjelaskan konsep toleransi beragama menurut ajaran Islam dan bagaimana menyikapi perbedaan pandangan dengan bijak.",
+    "content_url": "",
+    "category_id": 1,
+    "category": "Umum"
+  },
+  {
+    "id": 10,
+    "title": "Menghindari Perilaku Tercela: Hoax dan Fitnah",
+    "khotib": "Ustadz Abdullah",
+    "date": "2023-12-22",
+    "description": "Kajian mengenai bahaya berita bohong dan fitnah, serta pentingnya tabayyun dalam menyampaikan informasi.",
+    "content_url": "",
+    "category_id": 1,
+    "category": "Umum"
+  },
+  {
+    "id": 11,
+    "title": "Menyambut Tahun Baru dengan Muhasabah Diri",
+    "khotib": "Ustadz Ahmad",
+    "date": "2023-12-29",
+    "description": "Refleksi akhir tahun dan pentingnya melakukan evaluasi diri serta menetapkan target yang lebih baik di tahun mendatang.",
+    "content_url": "",
+    "category_id": 1,
+    "category": "Umum"
+  }
+]
